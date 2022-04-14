@@ -1,7 +1,5 @@
 import numpy as np
 from numpy.linalg import inv
-from scipy import signal
-from scipy.linalg import eig, expm
 import matplotlib.pyplot as plt
 
 # Spring mass damper parameters

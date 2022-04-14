@@ -3,15 +3,15 @@ from scipy import signal
 import matplotlib.pyplot as plt
 
 # Spring mass damper parameters
-m = 10      # Mass
+m = 1      # Mass
 k = 20      # Stiffness
 c = 5      # Damping
 u = 10      # Input (force)
 
 # Simulation parameters
 tstart = 0
-tstop = 60
-dt = 0.1
+tstop = 10
+dt = 0.01
 t = np.arange(tstart, tstop+1, dt)
 Ft = u*np.ones_like(t)              # Custom step input
 
