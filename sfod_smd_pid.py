@@ -24,11 +24,13 @@ B = np.array([[0],
 C = np.array([1, 0])
 D = 0
 
-# Discrete state-space (Bilinear transform)
+# Continuous to Discrete (RK4 numerical integration)
 I = np.eye(2)
-A_k = np.matmul((I + 0.5*dt*A), inv((I - 0.5*dt*A)))
-B_k = np.matmul(inv(A), (A_k - I))
-B_k = np.matmul(B_k, B) 
+A_2 = np.matmul(A, A)
+A_3 = np.matmul(A, A_2)
+A_4 = np.matmul(A, A_3)
+A_k = I + dt*A + dt**2/2*A_2 + dt**3/6*A_3 + dt**4/24*A_4
+B_k = np.matmul((dt*I + dt**2/2*A + dt**3/6*A_2 + dt**4/24*A_3), B)
 C_k = C
 D_k = D
 
@@ -56,7 +58,7 @@ for k in range(len(t)):
 
 # Plot results
 plt.plot(t, y)
-plt.plot(t, np.ones_like(t))
+plt.plot(t, ref*np.ones_like(t), color='r', linestyle="--")
 plt.xlabel("t")
 plt.ylabel("y")
 plt.legend(["Response", "Reference"])

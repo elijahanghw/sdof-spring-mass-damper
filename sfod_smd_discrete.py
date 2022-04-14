@@ -12,7 +12,7 @@ u = 10      # Input (force)
 x_0 = np.array([[0], 
                 [0]])
 tstart = 0
-tstop = 60
+tstop = 10
 dt = 0.01
 t = np.arange(tstart, tstop+1, dt)
 U_k = u*np.ones_like(t)              # Custom step input
@@ -25,11 +25,13 @@ B = np.array([[0],
 C = np.array([1, 0])
 D = 0
 
-# Discrete state-space (Bilinear transform)
+# Continuous to Discrete (RK4 numerical integration)
 I = np.eye(2)
-A_k = np.matmul((I + 0.5*dt*A), inv((I - 0.5*dt*A)))
-B_k = np.matmul(inv(A), (A_k - I))
-B_k = np.matmul(B_k, B) 
+A_2 = np.matmul(A, A)
+A_3 = np.matmul(A, A_2)
+A_4 = np.matmul(A, A_3)
+A_k = I + dt*A + dt**2/2*A_2 + dt**3/6*A_3 + dt**4/24*A_4
+B_k = np.matmul((dt*I + dt**2/2*A + dt**3/6*A_2 + dt**4/24*A_3), B)
 C_k = C
 D_k = D
 
