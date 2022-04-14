@@ -1,1 +1,1 @@
-# SDOF_SpringMassDamper
+# SDOF-SpringMassDamper
