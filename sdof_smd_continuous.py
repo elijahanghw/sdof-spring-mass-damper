@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # Spring mass damper parameters
 m = 10      # Mass
 k = 20      # Stiffness
-c = 5       # Damping
+c = 5      # Damping
 u = 10      # Input (force)
 
 # Simulation parameters
@@ -18,7 +18,7 @@ Ft = u*np.ones_like(t)              # Custom step input
 # Set up state-space matrices
 A = np.array([[0, 1],
               [-k/m, -c/m]])
-B = np.array([[0], 
+B = np.array([[0],
               [1/m]])
 C = np.array([1, 0])
 D = 0
